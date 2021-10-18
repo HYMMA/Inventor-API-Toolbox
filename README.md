@@ -46,9 +46,11 @@ catch (Exception)
 var partOccurance = assembly.AddMemeber(part.AsDocument(), new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
 
 //insert a content center component into assembly
-//in this case the third row of the BS 4848 family is selected. And the length of the angle is set to 658. This family is under Structural Sahpes category
+//in this case the third row of the BS 4848 family is selected. 
+//And the length of the angle is set to 658. This family is under Structural Sahpes category
 var contentCenterDesc = new ContentCenterItemDescriptor(row: 3, "Structural Shapes", "Angles", "BS 4848") 
    { CustomValue = new KeyValuePair<string, object>("B_L", 658) };
+   
 var contentCenterOccurance = assembly.AddMemeber(contentCenterDesc, new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
 ```
 ## Language
