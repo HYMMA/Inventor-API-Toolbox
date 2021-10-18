@@ -1,6 +1,7 @@
 ﻿using Inventor;
 using InventorToolBox;
 using System;
+using System.Collections.Generic;
 
 namespace InventorToolBoxConsole
 {
@@ -51,7 +52,11 @@ namespace InventorToolBoxConsole
             part.AsDocument().SetProperty(kDocumnetProperty.PartNumber, "S/S6758");
 
             //add the part that was created to the assembly
-            var occ = assembly.AddMemeber(app.Inventor, part.AsDocument(), new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
+            var partOccurance = assembly.AddMemeber(part.AsDocument(), new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
+
+            var contentCenterDesc = new ContentCenterItemDescriptor(row: 3, "Structural Shapes", "Angles", "BS 4848") 
+                { CustomValue = new KeyValuePair<string, object>("B_L", 658) };
+            var contentCenterOccurance = assembly.AddMemeber(contentCenterDesc, new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
         }
     }
 }

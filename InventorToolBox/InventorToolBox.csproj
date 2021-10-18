@@ -53,9 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ApplicationExtensions.cs" />
+    <Compile Include="Extensions\Assembly\ContentCenterItemDescriptor.cs" />
     <Compile Include="Extensions\DocumentExtensions.cs" />
     <Compile Include="Extensions\PartDocumentExtensions.cs" />
-    <Compile Include="Extensions\AssemblyDocumentExtensions.cs" />
+    <Compile Include="Extensions\Assembly\AssemblyDocumentExtensions.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Extensions\ComponentOccurancesExtensions.cs" />

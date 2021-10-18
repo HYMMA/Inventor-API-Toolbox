@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 
 namespace InventorToolBox
-
 {
     public static class AssemblyDocumentExtensions
     {
@@ -13,7 +12,7 @@ namespace InventorToolBox
         private static List<ComponentOccurrence> _list = new List<ComponentOccurrence>();
         #endregion
 
-        #region private methode/fuctions
+        #region private methode/functions
 
         /// <summary>
         /// recursively processes a document and adds componets to a private filed <see cref="_list"/>
@@ -189,18 +188,53 @@ namespace InventorToolBox
             CalculateAllNonPhantomNonReferencedOccurances(componentOccurrences, targetDoc);
             return _list;
         }
+        
+        /// <summary>
+        /// makes a translate matrix from the assymbly origin and main planes.
+        /// </summary>
+        /// <param name="position">relative position from the origin of the assembly all units are in centimeters</param>
+        /// <param name="rotation">angular postion in relation to the main planes in the assembly all units are in degrees</param>
+        /// <returns><see cref="Matrix"/> object in the space of the assembly.</returns>
+        public static Matrix GetMatrix(this AssemblyDocument assembly, double[] position, double[] rotation)
+        {
+            Application inventor = assembly.ComponentDefinition.Application;
+
+            // Set a reference to the transient geometry object.
+            TransientGeometry oTG = inventor.TransientGeometry;
+
+            // Create a matrix.  A new matrix is initialized with an identity matrix.
+            Matrix tempMatrix = oTG.CreateMatrix();
+            Matrix transMatrix = oTG.CreateMatrix();
+
+            //for all rotational directions . . .
+            for (int i = 0; i < rotation.Length; i++)
+            {
+                var index = new List<int>(new[] { 0, 0, 0 });
+                index[i] = 1;
+                var origin = oTG.CreatePoint(0, 0, 0);
+
+                //rotate about an axis that goeas through origin point and is along the rotaional direction
+                tempMatrix.SetToRotation(MathHelper.ToRadian(rotation[i]), oTG.CreateVector(index[0], index[1], index[2]), origin);
+                transMatrix.TransformBy(tempMatrix);
+                tempMatrix.SetToIdentity();
+            }
+
+            //move the object to the position 
+            transMatrix.SetTranslation(oTG.CreateVector(position[0], position[1], position[2]));
+            return transMatrix;
+        }
 
         /// <summary>
         /// Inserts a member (part/Subassembly or 3D model) in assembly and returns the created occurance
         /// </summary>
-        /// <param name="assy"></param>
+        /// <param name="assembly"></param>
         /// <param name="inventor">inventor assembly</param>
         /// <param name="member">any of the supported <see cref="Document"/> types to insert into assembly</param>
         /// <param name="position">position of the member relative to assembly's origin</param>
         /// <param name="rotation">rotation about the X and Y and Z axis</param>
         /// <returns><see cref="ComponentOccurrence"/> that is created inside the assembly</returns>
         /// <remarks>remeber that Inventors internal units for length are centimeters</remarks>
-        public static ComponentOccurrence AddMemeber(this AssemblyDocument assy, Application inventor, Document member, double[] position, double[] rotation)
+        public static ComponentOccurrence AddMemeber(this AssemblyDocument assembly, Document member, double[] position, double[] rotation)
         {
             if (member.DocumentType == DocumentTypeEnum.kDrawingDocumentObject ||
                 member.DocumentType == DocumentTypeEnum.kNoDocument ||
@@ -214,34 +248,58 @@ namespace InventorToolBox
             if (position.Length > 3 || rotation.Length > 3)
                 throw new ArgumentOutOfRangeException("position or rotaion array cannot have more than three memebers");
 
-            // Set a reference to the assembly component definition.
-            AssemblyComponentDefinition oAsmCompDef = assy.ComponentDefinition;
-
-            // Set a reference to the transient geometry object.
-            TransientGeometry oTG = inventor.TransientGeometry;
-
-            // Create a matrix.  A new matrix is initialized with an identity matrix.
-            Matrix tempMatrix = oTG.CreateMatrix();
-            Matrix transMatrix = oTG.CreateMatrix();
-
-            //for all rotational directions . . .
-            for (int i = 0; i < rotation.Length; i++)
-            {
-                var index = new List<int>(new[] { 0,0,0});
-                index[i] = 1;
-                var origin = oTG.CreatePoint(0, 0, 0);
-
-                //rotate about an axis that goeas through origin point and is along the rotaional direction
-                tempMatrix.SetToRotation(MathHelper.ToRadian(rotation[i]), oTG.CreateVector(index[0], index[1], index[2]), origin);
-                transMatrix.TransformBy(tempMatrix);
-                tempMatrix.SetToIdentity();
-            }
-
-            //move the object to the position 
-            transMatrix.SetTranslation(oTG.CreateVector(position[0], position[1], position[2]));
-
+            //get transitional matrix
+            var transMatrix=assembly.GetMatrix(position, rotation);
+            
             // Add the occurrence.
-            return oAsmCompDef.Occurrences.Add(member.FullFileName, transMatrix);
+            return assembly.ComponentDefinition.Occurrences.Add(member.FullFileName, transMatrix);
+        }
+
+        /// <summary>
+        /// Add a member to this assembly from content center
+        /// </summary>
+        /// <param name="itemDescriptor">identifier for the content center member that you want to insert into this assembly</param>
+        /// <param name="position">relative position (from assembly origin) of the member inside assembly</param>
+        /// <param name="rotation">relative angular (from main planes) position fo the membe rinside assembly</param>
+        /// <returns></returns>
+        public static ComponentOccurrence AddMemeber(this AssemblyDocument assembly, ContentCenterItemDescriptor itemDescriptor, double[] position, double[] rotation)
+        {
+            //get inventor application from assembly
+            var inventor = assembly.ComponentDefinition.Application as Application;
+
+            //get the top node
+            ContentTreeViewNode node = inventor.ContentCenter.TreeViewTopNode.ChildNodes[itemDescriptor.NodeHierarchy[0]];
+
+            //traverse through the nodes and get the last one
+            for (int i = 1; i <= itemDescriptor.NodeHierarchy.Length - 2; i++)
+            {
+                node = node.ChildNodes[itemDescriptor.NodeHierarchy[i]];
+            }
+            
+            //get the family displya name from the params
+            var familyDisplayName = itemDescriptor.NodeHierarchy[itemDescriptor.NodeHierarchy.Length - 1];
+
+            string memberFullFileName="";
+            
+            //find the family with the family display name
+            foreach (ContentFamily family in node.Families)
+            {
+                if (family.DisplayName.ToLower() != familyDisplayName.ToLower())
+                    continue;
+                var nameMap = itemDescriptor.GetNameValueMap(inventor);
+                //create the member (part file) from the table.
+                memberFullFileName = family.CreateMember(itemDescriptor.Row, out MemberManagerErrorsEnum failReason, out string failMessage, itemDescriptor.RefreshState, itemDescriptor.IsCustom, itemDescriptor.FileName, nameMap);
+                
+                //update the error messages in itemdescriptor
+                itemDescriptor.FailuerReason = failReason;
+                itemDescriptor.FailuerMessage = failMessage;
+                if (failReason != MemberManagerErrorsEnum.kMemberManagerNoError)
+                    return null;
+            }
+            var transMatrix = assembly.GetMatrix(position, rotation);
+            
+            // Add the occurrence.
+            return assembly.ComponentDefinition.Occurrences.Add(memberFullFileName, transMatrix);
         }
     }
 }
