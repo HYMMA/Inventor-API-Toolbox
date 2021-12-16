@@ -1,5 +1,7 @@
-# Extensions :information_source:
-Inventor DNA is a library of usefull extension and helper methods for Autodesk Inventor API. 
+# Overview
+If you use Inventor API you will find yourself dealing with different aspects of CAD and mathematics. Although Autodesk Inventor's API is well documented and structured it is not efficient to solve the same API problem over and over again. That is why we have decided to expand this library and simplify this API even further. This library was originally forked from [InventorToolBox] (https://github.com/H-Ashrafi/InventorToolBox).
+## Extensions :information_source:
+This library provides useful extension methods for Autodesk Inventor API. The idea is to convert popular macros or complex API subjects (such as transformation matrix and transient geometries) into extension methods.
 
 |These Inventor Interfaces are covered|
 |----------------------------------|
@@ -9,7 +11,7 @@ Inventor DNA is a library of usefull extension and helper methods for Autodesk I
 |Document|
 |PartDocument|
 
-# Sample
+### Extensions Sample
 To read or write the iProperties you can use ```GetProperty()``` and ```SetProperty()``` extension methods.
 ```csharp
 using InventorToolBox;
