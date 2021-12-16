@@ -1,5 +1,5 @@
 # Overview
-If you use Inventor API you will find yourself dealing with different aspects of CAD and mathematics. Although Autodesk Inventor's API is well documented and structured it is not efficient to solve the same API problem over and over again. That is why we have decided to expand this library and simplify this API even further. This library was originally forked from [InventorToolBox] (https://github.com/H-Ashrafi/InventorToolBox).
+If you are into CAD automation you will find yourself wrestling with CAD and mathematics subjects that slow your product development. Although Autodesk Inventor's API is well documented and structured it is not efficient to solve the same problem over and over again. That is why we have decided to expand [InventorToolBox] (https://github.com/H-Ashrafi/InventorToolBox) and simplify Inventor API even further.
 ## Extensions :information_source:
 This library provides useful extension methods for Autodesk Inventor API. The idea is to convert popular macros or complex API subjects (such as transformation matrix and transient geometries) into extension methods.
 
