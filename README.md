@@ -56,6 +56,6 @@ var contentCenterDesc = new ContentCenterItemDescriptor(row: 3, "Structural Shap
 var contentCenterOccurance = assembly.AddMemeber(contentCenterDesc, new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
 ```
 # Resources
--[Understanding Geometry and B-Rep in Inventor and Fusion 360](https://ekinssolutions.com/wp-content/uploads/2018/11/GeometryAndBRep-AU2018.pdf)
+- [Understanding Geometry and B-Rep in Inventor and Fusion 360](https://ekinssolutions.com/wp-content/uploads/2018/11/GeometryAndBRep-AU2018.pdf)
 
--[How Deep is the Rabbit Hole?Examing the Matrix and other Inventor® Math and Geometry Objects](https://modthemachine.typepad.com/files/mathgeometry.pdf)
+- [How Deep is the Rabbit Hole?Examing the Matrix and other Inventor® Math and Geometry Objects](https://modthemachine.typepad.com/files/mathgeometry.pdf)
