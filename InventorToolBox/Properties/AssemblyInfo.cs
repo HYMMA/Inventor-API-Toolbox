@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("InventorToolBox")]
+[assembly: AssemblyTitle("Hymma.InventorDna.ApiWrappers")]
 [assembly: AssemblyDescription("This is a library of usefull extension and helper methodes for Autodesk Inventor API.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HYMMA.net")]
-[assembly: AssemblyProduct("Inventor API Toolbox")]
+[assembly: AssemblyProduct("Hymma.InventorDna.ApiWrappers")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
