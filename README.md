@@ -1,5 +1,5 @@
 # OverView 🧰
-This is a library of use-full extension and helper methods for Autodesk Inventor API. 
+Inventor API Toolbox is a library of usefull extension and helper methods for Autodesk Inventor API. 
 
 |These Inventor Interfaces are covered|
 |----------------------------------|
