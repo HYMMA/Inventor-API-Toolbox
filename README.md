@@ -1,7 +1,7 @@
 # Overview
-If you are into CAD automation you will have to deal with CAD and mathematics subjects daily. Although Autodesk Inventor's API is well documented and professionally structured we forked [InventorToolBox](https://github.com/H-Ashrafi/InventorToolBox) to simplify Inventor API even further. 
+If you are into CAD automation you will have to deal with CAD and mathematics subjects daily. Although Autodesk Inventor® API is well documented and professionally structured we forked [InventorToolBox](https://github.com/H-Ashrafi/InventorToolBox) to simplify Inventor API even further. 
 ## Extensions :information_source:
-This library provides useful extension methods for Autodesk Inventor API. The idea is to convert popular macros or complex API subjects (such as transformation matrix and transient geometries) into extension methods.
+This library provides useful extension methods for Autodesk Inventor® API. The idea is to convert popular macros or complex API subjects (such as transformation matrix and transient geometries) into extension methods.
 
 |These Inventor Interfaces are covered|
 |----------------------------------|
@@ -55,3 +55,9 @@ var contentCenterDesc = new ContentCenterItemDescriptor(row: 3, "Structural Shap
    
 var contentCenterOccurance = assembly.AddMemeber(contentCenterDesc, new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
 ```
+# Resources
++[Understanding Geometry and B-Rep in Inventor and
+Fusion 360](https://ekinssolutions.com/wp-content/uploads/2018/11/GeometryAndBRep-AU2018.pdf)
++[How Deep is the Rabbit Hole?
+Examing the Matrix and other Inventor® Math and
+Geometry Objects](https://modthemachine.typepad.com/files/mathgeometry.pdf)
