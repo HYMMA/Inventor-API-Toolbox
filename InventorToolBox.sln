@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventorDna.Extensions", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventorDna.Console", "Console\InventorDna.Console.csproj", "{36B49C60-E5C3-41BB-A0C0-F30E11FAAE87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventorDna.Addins", "Addins\InventorDna.Addins.csproj", "{52D3ADB1-D958-4E0F-B0DC-ECEC3B9AE502}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{36B49C60-E5C3-41BB-A0C0-F30E11FAAE87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36B49C60-E5C3-41BB-A0C0-F30E11FAAE87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36B49C60-E5C3-41BB-A0C0-F30E11FAAE87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52D3ADB1-D958-4E0F-B0DC-ECEC3B9AE502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D3ADB1-D958-4E0F-B0DC-ECEC3B9AE502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D3ADB1-D958-4E0F-B0DC-ECEC3B9AE502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D3ADB1-D958-4E0F-B0DC-ECEC3B9AE502}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
