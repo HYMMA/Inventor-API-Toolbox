@@ -53,5 +53,3 @@ var contentCenterDesc = new ContentCenterItemDescriptor(row: 3, "Structural Shap
    
 var contentCenterOccurance = assembly.AddMemeber(contentCenterDesc, new[] { 0d, 0d, 1d }, new[] { 10d, 10d, 0d });
 ```
-## Language
-C# 
