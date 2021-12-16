@@ -1,4 +1,4 @@
-# Overview Extansions :information_source:
+# Overview Extensions :information_source:
 Inventor DNA is a library of usefull extension and helper methods for Autodesk Inventor API. 
 
 |These Inventor Interfaces are covered|
