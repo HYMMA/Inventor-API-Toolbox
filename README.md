@@ -1,5 +1,5 @@
 # Overview
-If you are into CAD automation you will have to deal with CAD and mathematics subjects daily. Although Autodesk Inventor's API is well documented and professionally structured since we didnt want to solve the same problem every day we forked [InventorToolBox](https://github.com/H-Ashrafi/InventorToolBox) to simplify Inventor API even further. 
+If you are into CAD automation you will have to deal with CAD and mathematics subjects daily. Although Autodesk Inventor's API is well documented and professionally structured we forked [InventorToolBox](https://github.com/H-Ashrafi/InventorToolBox) to simplify Inventor API even further. 
 ## Extensions :information_source:
 This library provides useful extension methods for Autodesk Inventor API. The idea is to convert popular macros or complex API subjects (such as transformation matrix and transient geometries) into extension methods.
 
